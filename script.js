@@ -57,13 +57,22 @@ function showEpisodes(category, dramaTitle) {
 
 // 显示激励广告弹窗
 function showAdPopup() {
-  document.getElementById("ad-popup").style.display = "flex";
-}
+  // 添加广告脚本标签
+  const tag = document.createElement('script');
+  tag.src = '//niphaumeenses.net/vignette.min.js';
+  tag.dataset.zone = '8591336';
+  tag.dataset.sdk = 'show_8591336';
 
-// 观看广告按钮点击事件
-function watchAd() {
-  alert("广告观看完成！现在你可以访问网盘链接了。");
-  closePopup();
+  document.body.appendChild(tag);
+
+  tag.onload = function () {
+    // 显示广告的回调
+    show_8591336().then(() => {
+      // 在广告观看后执行的操作
+      alert("广告观看完成！现在你可以访问网盘链接了。");
+      closePopup();
+    });
+  }
 }
 
 // 关闭广告弹窗
