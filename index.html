@@ -1,63 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>壁纸下载</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin-top: 20px;
-        }
-        #downloadButton {
-            display: none;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        #adContainer {
-            margin: 20px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-        }
-        iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KO-FI Short Drama</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
 
-    <h1>点击广告查看并下载壁纸</h1>
+  <!-- 顶部导航栏 -->
+  <header>
+    <div class="logo">KO-FI Short Drama</div>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showCategory('family')">家庭</a></li>
+        <li><a href="#" onclick="showCategory('baby')">萌宝</a></li>
+        <li><a href="#" onclick="showCategory('scifi')">科幻</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div id="adContainer">
-        <!-- 这里将加载 BitLabs 广告 -->
-        <iframe id="adFrame" src="https://web.bitlabs.ai/?uid=user123&token=5003fcb3-1b47-4575-b30c-e88b3c9f54d8"></iframe>
+  <!-- 分类展示区域 -->
+  <main>
+    <section id="category-section">
+      <!-- 分类下的短剧列表会动态生成 -->
+    </section>
+  </main>
+
+  <!-- 激励广告弹窗 -->
+  <div id="ad-popup" class="popup">
+    <div class="popup-content">
+      <p>观看完广告免费获取观看权限</p>
+      <button id="watch-ad" onclick="watchAd()">观看广告</button>
+      <button id="close-popup" onclick="closePopup()">关闭</button>
     </div>
-
-    <script>
-        // 模拟广告加载完成，显示下载按钮
-        function loadAd() {
-            // 广告加载完成后，显示下载按钮
-            document.getElementById('downloadButton').style.display = 'block';
-        }
-
-        // 延时2秒后模拟广告加载
-        setTimeout(loadAd, 2000);
-
-        // 下载按钮的点击事件
-        document.getElementById('downloadButton').onclick = function() {
-            window.location.href = "https://securityarsenal.wed2c.com"; // 替换为实际壁纸URL
-        };
-    </script>
-
-    <button id="downloadButton">下载壁纸</button>
+  </div>
 
 </body>
 </html>
