@@ -51,41 +51,33 @@
 
   <!-- 网盘链接展示区域 -->
   <div id="content" class="content">
-    <h1 id="drama-title">短剧标题</h1>
-    <img id="drama-cover" src="" alt="封面" width="300">
-    <p>点击下面的按钮观看视频：</p>
-    <button class="button" id="watch-btn">观看</button>
+    <p>广告观看完成，点击下面的按钮访问网盘链接：</p>
+    <button class="button" id="watch-btn">访问网盘</button>
   </div>
 
   <script>
-    // 获取 URL 参数（获取 shortDramaId）
+    // 获取 URL 参数（获取 dramaId）
     const urlParams = new URLSearchParams(window.location.search);
     const dramaId = urlParams.get('dramaId');
 
     // 短剧数据（可以在这里直接设置短剧数据，或者通过后端/数据库获取）
     const dramas = {
       "A075": {
-        title: "A075 - KO-FI Short Drama",
-        cover: "https://your-telegram-cover-link.jpg",
-        link: "https://mega.nz/folder/XXXX#YourLink"
+        link: "https://mega.nz/folder/XXXX#YourLink"  // 替换为实际网盘链接
       },
       "A076": {
-        title: "A076 - KO-FI Short Drama",
-        cover: "https://your-telegram-cover-link.jpg",
-        link: "https://mega.nz/folder/YYYY#YourLink"
+        link: "https://mega.nz/folder/YYYY#YourLink"  // 替换为实际网盘链接
       }
       // 添加更多短剧
     };
 
-    // 根据 dramaId 加载对应的短剧信息
+    // 根据 dramaId 加载对应的短剧网盘链接
     if (dramaId && dramas[dramaId]) {
       const drama = dramas[dramaId];
-      document.getElementById('drama-title').innerText = drama.title;
-      document.getElementById('drama-cover').src = drama.cover;
       document.getElementById('watch-btn').onclick = () => window.location.href = drama.link;
     }
 
-    // 关闭广告并显示短剧内容
+    // 关闭广告并显示网盘链接
     function closeAd() {
       document.getElementById('ad-popup').style.display = 'none';
       document.getElementById('content').style.display = 'block';
