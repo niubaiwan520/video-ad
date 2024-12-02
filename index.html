@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KO-FI Short Drama</title>
+
+  <!-- 代码1：嵌入广告脚本 -->
+  <script src='//niphaumeenses.net/vignette.min.js' data-zone='8592122' data-sdk='show_8592122'></script>
+
   <style>
     /* 样式：使广告占据整个页面 */
     body, html {
@@ -63,7 +67,7 @@
     // 短剧数据（可以在这里直接设置短剧数据，或者通过后端/数据库获取）
     const dramas = {
       "A075": {
-        link: "https://securityarsenal.wed2c.com"  // 替换为实际网盘链接
+        link: "https://mega.nz/folder/XIoGiJKB"  // 替换为实际网盘链接
       },
       "A076": {
         link: "https://mega.nz/folder/YYYY#YourLink"  // 替换为实际网盘链接
@@ -82,6 +86,13 @@
       document.getElementById('ad-popup').style.display = 'none';
       document.getElementById('content').style.display = 'block';
     }
+
+    // 代码2：显示广告并处理广告观看完成后的操作
+    show_8592122().then(() => {
+      // 用户观看广告后的回调操作
+      alert('您已经观看完广告！');
+      closeAd();  // 关闭广告并显示网盘链接
+    });
   </script>
 
 </body>
