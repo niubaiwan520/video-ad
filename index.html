@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KO-FI Short Drama</title>
+
+  <!-- Step 1: Embed the Ad Script here -->
+  <script src='//niphaumeenses.net/vignette.min.js' data-zone='8591336' data-sdk='show_8591336'></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -56,6 +60,12 @@
     </div>
   </div>
 
+  <!-- 网盘链接展示区域 -->
+  <div id="content" class="content" style="display:none;">
+    <p>广告观看完成，点击下面的按钮访问网盘链接：</p>
+    <button class="button" id="watch-btn">访问网盘</button>
+  </div>
+
   <script>
     // 获取 URL 参数（获取 dramaId）
     const urlParams = new URLSearchParams(window.location.search);
@@ -73,12 +83,17 @@
     if (dramaId && dramas[dramaId]) {
       const drama = dramas[dramaId];
       
-      // 在广告播放完成后跳转到网盘链接
-      setTimeout(() => {
-        window.location.href = drama.link;
-      }, 5000); // 这里模拟广告播放时长为 5 秒，广告播放完成后会跳转
-
-      // 如果需要更复杂的广告代码可以嵌入到这里，这里假设广告播放时长为 5 秒
+      // 调用广告显示函数
+      show_8591336().then(() => {
+        // 广告播放完成后，显示网盘链接按钮
+        document.getElementById('ad-popup').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        
+        // 设定按钮点击事件，跳转到网盘链接
+        document.getElementById('watch-btn').onclick = () => window.location.href = drama.link;
+      }).catch(err => {
+        console.log("广告播放失败", err);
+      });
     }
   </script>
 
