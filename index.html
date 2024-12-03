@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,47 +52,47 @@
 </head>
 <body>
 
-  <!-- 广告弹窗 -->
+  <!-- Ad Popup -->
   <div id="ad-popup">
     <div class="ad-content">
-      <h2>观看广告...</h2>
-      <p>广告播放完毕后即可免费观看！</p>
+      <h2>Watching ad...</h2>
+      <p>The ad will end soon. You can watch for free after the ad finishes!</p>
     </div>
   </div>
 
-  <!-- 网盘链接展示区域 -->
+  <!-- Link to the cloud storage after ad -->
   <div id="content" class="content" style="display:none;">
-    <p>广告观看完成</p>
-    <button class="button" id="watch-btn">立即观看</button>
+    <p>Ad viewing completed</p>
+    <button class="button" id="watch-btn">Watch Now</button>
   </div>
 
   <script>
-    // 获取 URL 参数（获取 dramaId）
+    // Get URL parameter (get dramaId)
     const urlParams = new URLSearchParams(window.location.search);
     const dramaId = urlParams.get('dramaId');
 
-    // 短剧数据
+    // Drama data
     const dramas = {
       "A075": {
-        link: "https://mega.nz/folder/XIoGiJKB"  // 短剧 A075 网盘链接
+        link: "https://mega.nz/folder/XIoGiJKB"  // Drama A075 cloud storage link
       }
-      // 可以继续添加更多短剧数据
+      // You can add more drama data here
     };
 
-    // 根据 dramaId 加载对应的短剧网盘链接
+    // Load the corresponding cloud storage link based on dramaId
     if (dramaId && dramas[dramaId]) {
       const drama = dramas[dramaId];
       
-      // 调用广告显示函数
+      // Call the ad display function
       show_8591336().then(() => {
-        // 广告播放完成后，显示网盘链接按钮
+        // After ad finishes, display the cloud storage link button
         document.getElementById('ad-popup').style.display = 'none';
         document.getElementById('content').style.display = 'block';
         
-        // 设定按钮点击事件，跳转到网盘链接
+        // Set button click event to jump to the cloud storage link
         document.getElementById('watch-btn').onclick = () => window.location.href = drama.link;
       }).catch(err => {
-        console.log("广告播放失败", err);
+        console.log("Ad failed to display", err);
       });
     }
   </script>
