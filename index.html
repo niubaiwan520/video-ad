@@ -6,17 +6,16 @@
   <title>KO-FI Short Drama</title>
 
   <!-- 代码1：嵌入广告脚本 -->
-  <script src="https://niphaumeenses.net/vignette.min.js" data-zone="8592122" data-sdk="show_8592122"></script>
+  <script src='//niphaumeenses.net/vignette.min.js' data-zone='8592122' data-sdk='show_8592122'></script>
 
   <style>
-    /* 样式：使广告显示为一个小广告框，而不是占据整个页面 */
+    /* 样式：使广告占据整个页面 */
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       background-color: #f4f4f4;
       text-align: center;
-      font-family: Arial, sans-serif;
     }
 
     .ad-popup {
@@ -24,17 +23,8 @@
       justify-content: center;
       align-items: center;
       height: 100%;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      max-width: 600px;
-      padding: 20px;
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .content {
@@ -53,28 +43,15 @@
     .button:hover {
       background-color: #555;
     }
-
-    /* 通过 CSS 隐藏广告中的“继续”按钮 */
-    .continue-btn {
-      display: none; /* 隐藏继续按钮 */
-    }
-
-    /* 覆盖广告框中的文本内容 */
-    #ad-popup p {
-      display: none; /* 隐藏原始文本 */
-    }
-
-    /* 自定义新的文本 */
-    #ad-popup:before {
-      content: "广告播放完毕即可观看"; /* 自定义文本 */
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-    }
   </style>
 </head>
 <body>
+
+  <!-- 激励广告占据整个页面 -->
+  <div id="ad-popup" class="ad-popup">
+    <p>观看广告以获取观看权限...</p>
+    <button class="button" id="close-ad" onclick="closeAd()">关闭广告</button>
+  </div>
 
   <!-- 网盘链接展示区域 -->
   <div id="content" class="content">
@@ -104,19 +81,20 @@
       document.getElementById('watch-btn').onclick = () => window.location.href = drama.link;
     }
 
-    // 代码2：显示广告并处理广告观看完成后的操作
-    function playAd() {
-      show_8592122().then(() => {
-        // 用户观看广告后的回调操作
-        alert('您已经观看完广告！');
-        closeAd();  // 关闭广告并显示网盘链接
-      }).catch((error) => {
-        console.error('广告加载失败:', error);
-      });
+    // 关闭广告并显示网盘链接
+    function closeAd() {
+      document.getElementById('ad-popup').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
     }
 
-    // 直接调用广告显示并处理回调
-    playAd();
+    // 代码2：显示广告并处理广告观看完成后的操作
+    show_8592122().then(() => {
+      // 用户观看广告后的回调操作
+      alert('您已经观看完广告！');
+      closeAd();  // 关闭广告并显示网盘链接
+    }).catch((error) => {
+      console.error('广告加载失败:', error);
+    });
   </script>
 
 </body>
