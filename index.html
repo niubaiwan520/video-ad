@@ -6,7 +6,7 @@
   <title>KO-FI Short Drama</title>
 
   <!-- 代码1：嵌入广告脚本 -->
-  <script src='//niphaumeenses.net/vignette.min.js' data-zone='8592122' data-sdk='show_8592122'></script>
+  <script src="https://niphaumeenses.net/vignette.min.js" data-zone="8592122" data-sdk="show_8592122"></script>
 
   <style>
     /* 样式：使广告显示为一个小广告框，而不是占据整个页面 */
@@ -54,21 +54,9 @@
       background-color: #555;
     }
 
-    /* 隐藏继续按钮 */
-    .continue-btn {
-      display: none;
-    }
   </style>
 </head>
 <body>
-
-  <!-- 激励广告占据一个固定大小的框 -->
-  <div id="ad-popup" class="ad-popup">
-    <div>
-      <p id="ad-text">观看广告以获取观看权限...</p>
-      <button class="button" id="close-ad" onclick="closeAd()">关闭广告</button>
-    </div>
-  </div>
 
   <!-- 网盘链接展示区域 -->
   <div id="content" class="content">
@@ -98,22 +86,19 @@
       document.getElementById('watch-btn').onclick = () => window.location.href = drama.link;
     }
 
-    // 关闭广告并显示网盘链接
-    function closeAd() {
-      document.getElementById('ad-popup').style.display = 'none';
-      document.getElementById('content').style.display = 'block';
+    // 代码2：显示广告并处理广告观看完成后的操作
+    function playAd() {
+      show_8592122().then(() => {
+        // 用户观看广告后的回调操作
+        alert('您已经观看完广告！');
+        closeAd();  // 关闭广告并显示网盘链接
+      }).catch((error) => {
+        console.error('广告加载失败:', error);
+      });
     }
 
-    // 代码2：显示广告并处理广告观看完成后的操作
-    show_8592122().then(() => {
-      // 用户观看广告后的回调操作
-      alert('您已经观看完广告！');
-      // 修改广告文本为“广告播放完毕之后即可观看”
-      document.getElementById('ad-text').innerText = '广告播放完毕之后即可观看';
-      closeAd();  // 关闭广告并显示网盘链接
-    }).catch((error) => {
-      console.error('广告加载失败:', error);
-    });
+    // 直接调用广告显示并处理回调
+    playAd();
   </script>
 
 </body>
