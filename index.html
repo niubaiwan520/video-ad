@@ -92,6 +92,8 @@
       // 用户观看广告后的回调操作
       alert('您已经观看完广告！');
       closeAd();  // 关闭广告并显示网盘链接
+    }).catch((error) => {
+      console.error('广告加载失败:', error);
     });
   </script>
 
