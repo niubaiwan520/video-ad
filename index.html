@@ -1,62 +1,59 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KO-FI Short Drama</title>
-
-  <!-- 代码1：嵌入广告脚本 -->
-  <script src='//niphaumeenses.net/vignette.min.js' data-zone='8592122' data-sdk='show_8592122'></script>
-
   <style>
-    /* 样式：使广告占据整个页面 */
-    body, html {
+    body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      height: 100%;
       background-color: #f4f4f4;
       text-align: center;
     }
-
-    .ad-popup {
+    #ad-popup {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
+      z-index: 1000;
     }
-
-    .content {
-      display: none;
+    #ad-popup .ad-content {
+      background-color: #fff;
+      color: black;
       padding: 20px;
+      border-radius: 8px;
+      text-align: center;
     }
-
-    .button {
-      padding: 15px;
-      background-color: #333;
+    #ad-popup button {
+      background-color: #ff6600;
       color: white;
+      padding: 10px 20px;
       border: none;
       cursor: pointer;
+      border-radius: 5px;
+      font-size: 18px;
     }
-
-    .button:hover {
-      background-color: #555;
+    #ad-popup button:hover {
+      background-color: #e65c00;
     }
   </style>
 </head>
 <body>
 
-  <!-- 激励广告占据整个页面 -->
-  <div id="ad-popup" class="ad-popup">
-    <p>观看广告以获取观看权限...</p>
-    <button class="button" id="close-ad" onclick="closeAd()">关闭广告</button>
-  </div>
-
-  <!-- 网盘链接展示区域 -->
-  <div id="content" class="content">
-    <p>广告观看完成，点击下面的按钮访问网盘链接：</p>
-    <button class="button" id="watch-btn">访问网盘</button>
+  <!-- 广告弹窗 -->
+  <div id="ad-popup">
+    <div class="ad-content">
+      <h2>观看广告...</h2>
+      <p>广告即将结束，准备跳转到网盘链接！</p>
+    </div>
   </div>
 
   <script>
@@ -64,37 +61,25 @@
     const urlParams = new URLSearchParams(window.location.search);
     const dramaId = urlParams.get('dramaId');
 
-    // 短剧数据（可以在这里直接设置短剧数据，或者通过后端/数据库获取）
+    // 短剧数据
     const dramas = {
       "A075": {
-        link: "https://mega.nz/folder/XIoGiJKB"  // 替换为实际网盘链接
-      },
-      "A076": {
-        link: "https://ko-fi.com/shortdrama"  // 替换为实际网盘链接
+        link: "https://mega.nz/folder/XIoGiJKB"  // 短剧 A075 网盘链接
       }
-      // 添加更多短剧
+      // 可以继续添加更多短剧数据
     };
 
     // 根据 dramaId 加载对应的短剧网盘链接
     if (dramaId && dramas[dramaId]) {
       const drama = dramas[dramaId];
-      document.getElementById('watch-btn').onclick = () => window.location.href = drama.link;
-    }
+      
+      // 在广告播放完成后跳转到网盘链接
+      setTimeout(() => {
+        window.location.href = drama.link;
+      }, 5000); // 这里模拟广告播放时长为 5 秒，广告播放完成后会跳转
 
-    // 关闭广告并显示网盘链接
-    function closeAd() {
-      document.getElementById('ad-popup').style.display = 'none';
-      document.getElementById('content').style.display = 'block';
+      // 如果需要更复杂的广告代码可以嵌入到这里，这里假设广告播放时长为 5 秒
     }
-
-    // 代码2：显示广告并处理广告观看完成后的操作
-    show_8592122().then(() => {
-      // 用户观看广告后的回调操作
-      alert('您已经观看完广告！');
-      closeAd();  // 关闭广告并显示网盘链接
-    }).catch((error) => {
-      console.error('广告加载失败:', error);
-    });
   </script>
 
 </body>
