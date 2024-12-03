@@ -9,13 +9,14 @@
   <script src='//niphaumeenses.net/vignette.min.js' data-zone='8592122' data-sdk='show_8592122'></script>
 
   <style>
-    /* 样式：使广告占据整个页面 */
+    /* 样式：使广告显示为一个小广告框，而不是占据整个页面 */
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       background-color: #f4f4f4;
       text-align: center;
+      font-family: Arial, sans-serif;
     }
 
     .ad-popup {
@@ -23,8 +24,17 @@
       justify-content: center;
       align-items: center;
       height: 100%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 600px;
+      padding: 20px;
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .content {
@@ -43,14 +53,21 @@
     .button:hover {
       background-color: #555;
     }
+
+    /* 隐藏继续按钮 */
+    .continue-btn {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- 激励广告占据整个页面 -->
+  <!-- 激励广告占据一个固定大小的框 -->
   <div id="ad-popup" class="ad-popup">
-    <p>观看广告以获取观看权限...</p>
-    <button class="button" id="close-ad" onclick="closeAd()">关闭广告</button>
+    <div>
+      <p id="ad-text">观看广告以获取观看权限...</p>
+      <button class="button" id="close-ad" onclick="closeAd()">关闭广告</button>
+    </div>
   </div>
 
   <!-- 网盘链接展示区域 -->
@@ -91,6 +108,8 @@
     show_8592122().then(() => {
       // 用户观看广告后的回调操作
       alert('您已经观看完广告！');
+      // 修改广告文本为“广告播放完毕之后即可观看”
+      document.getElementById('ad-text').innerText = '广告播放完毕之后即可观看';
       closeAd();  // 关闭广告并显示网盘链接
     }).catch((error) => {
       console.error('广告加载失败:', error);
